@@ -1,0 +1,4 @@
+rootProject.name = 'proteus-chat-bot'
+include 'chat-service'
+include 'chat-idl'
+

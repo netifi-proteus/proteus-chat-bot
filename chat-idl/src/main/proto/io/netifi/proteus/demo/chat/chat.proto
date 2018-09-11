@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package io.netifi.proteus.demo.chat;
+
+option java_package = "io.netifi.proteus.demo.chat";
+option java_outer_classname = "ChatProto";
+option java_multiple_files = true;
+
+
+import "rsocket/options.proto";
+
+service Chat {
+
+    rpc Chat (ChatEvent) returns (NonResponse) {
+        option (io.rsocket.rpc.options) = {
+          fire_and_forget: true
+        };
+    }
+
+    rpc Join (JoinEvent) returns (NonResponse) {
+        option (io.rsocket.rpc.options) = {
+          fire_and_forget: true
+        };
+    }
+}
+
+message NonResponse {
+
+}
+
+message User {
+    string alias = 1;
+    string avatar = 2;
+}
+
+message ChatEvent {
+    User user = 1;
+    string message = 2;
+}
+
+message JoinEvent{
+    User user = 1;
+}
